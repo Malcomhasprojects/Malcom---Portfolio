@@ -92,7 +92,7 @@ const Hero = () => {
                <div className="text-center">
                  <div className="w-32 h-32 mx-auto mb-4 flex items-center justify-center">
                    <img 
-                     src="/pics/Screenshot 2025-08-15 141256.jpeg" 
+                     src="/images/Screenshot 2025-08-15 141256.jpeg" 
                      alt="Innovation" 
                      className="w-full h-full object-cover rounded-full"
                    />
