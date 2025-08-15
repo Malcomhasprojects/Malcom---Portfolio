@@ -97,7 +97,6 @@ const Hero = () => {
                       className="w-full h-full object-cover rounded-2xl"
                     />
                   </div>
-                  <p className="text-blue-400 font-semibold">Innovation</p>
                 </div>
               </div>
           </div>
