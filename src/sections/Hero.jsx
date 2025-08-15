@@ -88,13 +88,16 @@ const Hero = () => {
           <div className="hero-3d-layout">
             <HeroExperience />
                          {/* Mobile fallback */}
-             <div className="md:hidden flex items-center justify-center h-full">
-               <div className="text-center">
-                 <div className="w-32 h-32 mx-auto mb-4 flex items-center justify-center">
+             <div className="md:hidden flex items-center justify-center h-full w-full">
+               <div className="text-center w-full">
+                 <div className="w-full h-48 mx-auto mb-4 flex items-center justify-center">
                    <img 
                      src="/images/Screenshot 2025-08-15 141256.jpeg" 
                      alt="Innovation" 
-                     className="w-full h-full object-cover rounded-full"
+                     className="w-full h-full object-cover"
+                     style={{
+                       clipPath: "polygon(0% 20%, 20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%)"
+                     }}
                    />
                  </div>
                  <p className="text-blue-400 font-semibold">Innovation</p>
