@@ -7,6 +7,11 @@ import Computer from "./Computer";
 const ContactExperience = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
+  // Completely disable 3D on mobile for better performance
+  if (isMobile) {
+    return null;
+  }
+
   return (
     <Canvas shadows camera={{ position: [0, 3, 7], fov: 45 }}>
       <ambientLight intensity={0.5} color="#fff4e6" />

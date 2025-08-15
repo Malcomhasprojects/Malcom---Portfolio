@@ -11,6 +11,11 @@ const HeroExperience = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const isTablet = useMediaQuery({ query: "(max-width: 1024px)" });
 
+  // Completely disable 3D on mobile for better performance
+  if (isMobile) {
+    return null;
+  }
+
   return (
     <Canvas camera={{ position: [0, 0, 15], fov: 45 }}>
       {/* deep blue ambient */}

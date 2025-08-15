@@ -22,6 +22,9 @@ body {
   /* Prevent layout shifts */
   min-height: 100vh;
   position: relative;
+  /* Ensure smooth scrolling on all devices */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 section {
@@ -297,67 +300,54 @@ section {
     @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse;
   }
 
-  /* 3D Canvas Mobile Optimization */
+    /* 3D Canvas Mobile Optimization */
   @media (max-width: 768px) {
-    canvas {
-      pointer-events: none !important;
+    /* Disable animations on mobile for better performance */
+    .float-animation,
+    .pulse-glow,
+    .slide,
+    .wrapper {
+      animation: none !important;
+      animation-play-state: paused !important;
     }
     
-    /* Additional mobile optimizations */
+    /* Disable GSAP animations on mobile for better performance */
+    .hero-text h1,
+    .hero-description,
+    .hero-button,
+    .contact-info,
+    .contact-form {
+      animation: none !important;
+      transform: none !important;
+      transition: none !important;
+    }
+    
+    /* Optimize scroll performance */
+    .hero-layout,
+    .section-padding,
+    .app-showcase,
+    section {
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      will-change: auto;
+    }
+    
+    /* Additional performance optimizations */
     * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       -webkit-tap-highlight-color: transparent;
     }
     
-    /* Improve scrolling performance */
-    body {
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior: none;
-      touch-action: pan-y;
+    /* Force hardware acceleration */
+    .hero-layout,
+    .section-padding,
+    .app-showcase,
+    .contact-info,
+    .contact-form {
+      transform: translate3d(0, 0, 0);
+      -webkit-transform: translate3d(0, 0, 0);
     }
-    
-    /* Prevent 3D elements from interfering */
-    .hero-3d-layout,
-    .tech-icon-wrapper,
-    [data-threejs] {
-      pointer-events: none !important;
-      touch-action: none !important;
-    }
-    
-      /* Optimize animations for mobile */
-  .float-animation,
-  .pulse-glow {
-    animation-play-state: paused;
-  }
-  
-  /* Disable GSAP animations on mobile for better performance */
-  .hero-text h1,
-  .hero-description,
-  .hero-button {
-    animation: none !important;
-    transform: none !important;
-  }
-  
-  /* Optimize scroll performance */
-  .hero-layout,
-  .section-padding,
-  .app-showcase {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
-  
-  /* Additional performance optimizations */
-  * {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  /* Optimize 3D rendering */
-  canvas {
-    image-rendering: optimizeSpeed;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: optimize-contrast;
-  }
   }
 
   /* Navbar Styles */

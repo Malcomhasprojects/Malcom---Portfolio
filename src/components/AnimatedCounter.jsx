@@ -2,6 +2,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
+import { useMediaQuery } from "react-responsive";
 
 import { counterItems } from "../constants";
 
@@ -10,31 +11,42 @@ gsap.registerPlugin(ScrollTrigger);
 const AnimatedCounter = () => {
   const counterRef = useRef(null);
   const countersRef = useRef([]);
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   useGSAP(() => {
-    countersRef.current.forEach((counter, index) => {
-      const numberElement = counter.querySelector(".counter-number");
-      const item = counterItems[index];
+    // Only run animations on non-mobile devices for better performance
+    if (!isMobile) {
+      countersRef.current.forEach((counter, index) => {
+        const numberElement = counter.querySelector(".counter-number");
+        const item = counterItems[index];
 
-      // Set initial value to 0
-      gsap.set(numberElement, { innerText: "0" });
+        // Set initial value to 0
+        gsap.set(numberElement, { innerText: "0" });
 
-      // Create the counting animation
-      gsap.to(numberElement, {
-        innerText: item.value,
-        duration: 2.5,
-        ease: "power2.out",
-        snap: { innerText: 1 }, // Ensures whole numbers
-        scrollTrigger: {
-          trigger: "#counter",
-          start: "top center",
-        },
-        // Add the suffix after counting is complete
-        onComplete: () => {
-          numberElement.textContent = `${item.value}${item.suffix}`;
-        },
+        // Create the counting animation
+        gsap.to(numberElement, {
+          innerText: item.value,
+          duration: 2.5,
+          ease: "power2.out",
+          snap: { innerText: 1 }, // Ensures whole numbers
+          scrollTrigger: {
+            trigger: "#counter",
+            start: "top center",
+          },
+          // Add the suffix after counting is complete
+          onComplete: () => {
+            numberElement.textContent = `${item.value}${item.suffix}`;
+          },
+        });
+      }, counterRef);
+    } else {
+      // On mobile, just set the final values immediately
+      countersRef.current.forEach((counter, index) => {
+        const numberElement = counter.querySelector(".counter-number");
+        const item = counterItems[index];
+        numberElement.textContent = `${item.value}${item.suffix}`;
       });
-    }, counterRef);
+    }
   }, []);
 
   return (

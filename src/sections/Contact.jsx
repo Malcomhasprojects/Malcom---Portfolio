@@ -225,6 +225,15 @@ const Contact = () => {
           <div className="xl:col-span-3 min-h-96">
             <div className="bg-gradient-to-br from-blue-600 to-purple-600 w-full h-full hover:cursor-grab rounded-3xl overflow-hidden shadow-2xl shadow-blue-500/25">
               <ContactExperience />
+              {/* Mobile fallback */}
+              <div className="md:hidden flex items-center justify-center h-full">
+                <div className="text-center">
+                  <div className="w-24 h-24 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <span className="text-4xl">💬</span>
+                  </div>
+                  <p className="text-white font-semibold">Let's Connect</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

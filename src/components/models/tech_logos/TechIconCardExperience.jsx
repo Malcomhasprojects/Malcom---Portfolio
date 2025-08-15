@@ -8,6 +8,11 @@ const TechIconCardExperience = ({ model }) => {
   const scene = useGLTF(model.modelPath);
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
+  // Completely disable 3D on mobile for better performance
+  if (isMobile) {
+    return null;
+  }
+
   useEffect(() => {
     if (model.name === "Interactive Developer") {
       scene.scene.traverse((child) => {

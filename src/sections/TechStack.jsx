@@ -1,5 +1,6 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useMediaQuery } from "react-responsive";
 
 import TitleHeader from "../components/TitleHeader";
 import TechIconCardExperience from "../components/models/tech_logos/TechIconCardExperience";
@@ -7,32 +8,37 @@ import { techStackIcons } from "../constants";
 // import { techStackImgs } from "../constants";
 
 const TechStack = () => {
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+
   // Animate the tech cards in the skills section
   useGSAP(() => {
-    // This animation is triggered when the user scrolls to the #skills wrapper
-    // The animation starts when the top of the wrapper is at the center of the screen
-    // The animation is staggered, meaning each card will animate in sequence
-    // The animation ease is set to "power2.inOut", which is a slow-in fast-out ease
-    gsap.fromTo(
-      ".tech-card",
-      {
-        // Initial values
-        y: 50, // Move the cards down by 50px
-        opacity: 0, // Set the opacity to 0
-      },
-      {
-        // Final values
-        y: 0, // Move the cards back to the top
-        opacity: 1, // Set the opacity to 1
-        duration: 1, // Duration of the animation
-        ease: "power2.inOut", // Ease of the animation
-        stagger: 0.2, // Stagger the animation by 0.2 seconds
-        scrollTrigger: {
-          trigger: "#skills", // Trigger the animation when the user scrolls to the #skills wrapper
-          start: "top center", // Start the animation when the top of the wrapper is at the center of the screen
+    // Only run animations on non-mobile devices for better performance
+    if (!isMobile) {
+      // This animation is triggered when the user scrolls to the #skills wrapper
+      // The animation starts when the top of the wrapper is at the center of the screen
+      // The animation is staggered, meaning each card will animate in sequence
+      // The animation ease is set to "power2.inOut", which is a slow-in fast-out ease
+      gsap.fromTo(
+        ".tech-card",
+        {
+          // Initial values
+          y: 50, // Move the cards down by 50px
+          opacity: 0, // Set the opacity to 0
         },
-      }
-    );
+        {
+          // Final values
+          y: 0, // Move the cards back to the top
+          opacity: 1, // Set the opacity to 1
+          duration: 1, // Duration of the animation
+          ease: "power2.inOut", // Ease of the animation
+          stagger: 0.2, // Stagger the animation by 0.2 seconds
+          scrollTrigger: {
+            trigger: "#skills", // Trigger the animation when the user scrolls to the #skills wrapper
+            start: "top center", // Start the animation when the top of the wrapper is at the center of the screen
+          },
+        }
+      );
+    }
   });
 
   return (
@@ -60,6 +66,14 @@ const TechStack = () => {
                     which renders the 3D model of the tech stack icon. */}
                 <div className="tech-icon-wrapper">
                   <TechIconCardExperience model={techStackIcon} />
+                  {/* Mobile fallback */}
+                  <div className="md:hidden flex items-center justify-center w-full h-full">
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-2 flex items-center justify-center">
+                        <span className="text-2xl">💻</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 {/* The padding-x and w-full classes are used to add horizontal padding to the 
                     text and make it take up the full width of the component. */}
