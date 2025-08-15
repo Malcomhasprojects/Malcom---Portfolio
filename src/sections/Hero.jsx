@@ -1,5 +1,6 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useMediaQuery } from "react-responsive";
 
 import AnimatedCounter from "../components/AnimatedCounter";
 import Button from "../components/Button";
@@ -7,24 +8,29 @@ import { words } from "../constants";
 import HeroExperience from "../components/models/hero_models/HeroExperience";
 
 const Hero = () => {
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+
   useGSAP(() => {
-    gsap.fromTo(
-      ".hero-text h1",
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, stagger: 0.2, duration: 1, ease: "power2.inOut" }
-    );
-    
-    gsap.fromTo(
-      ".hero-description",
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.2, delay: 0.5, ease: "power2.out" }
-    );
-    
-    gsap.fromTo(
-      ".hero-button",
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, delay: 0.8, ease: "power2.out" }
-    );
+    // Only run animations on non-mobile devices for better performance
+    if (!isMobile) {
+      gsap.fromTo(
+        ".hero-text h1",
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.2, duration: 1, ease: "power2.inOut" }
+      );
+      
+      gsap.fromTo(
+        ".hero-description",
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.2, delay: 0.5, ease: "power2.out" }
+      );
+      
+      gsap.fromTo(
+        ".hero-button",
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, delay: 0.8, ease: "power2.out" }
+      );
+    }
   });
 
   return (
@@ -71,6 +77,7 @@ const Hero = () => {
                 text="View My Projects"
                 className="md:w-1/3 md:h-16 w-2/3 h-14"
                 id="counter"
+                target="work"
               />
             </div>
           </div>

@@ -16,6 +16,12 @@ body {
   /* Improve mobile scrolling performance */
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: none;
+  /* Additional mobile scrolling optimizations */
+  touch-action: pan-y;
+  will-change: scroll-position;
+  /* Prevent layout shifts */
+  min-height: 100vh;
+  position: relative;
 }
 
 section {
@@ -296,6 +302,62 @@ section {
     canvas {
       pointer-events: none !important;
     }
+    
+    /* Additional mobile optimizations */
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Improve scrolling performance */
+    body {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: none;
+      touch-action: pan-y;
+    }
+    
+    /* Prevent 3D elements from interfering */
+    .hero-3d-layout,
+    .tech-icon-wrapper,
+    [data-threejs] {
+      pointer-events: none !important;
+      touch-action: none !important;
+    }
+    
+      /* Optimize animations for mobile */
+  .float-animation,
+  .pulse-glow {
+    animation-play-state: paused;
+  }
+  
+  /* Disable GSAP animations on mobile for better performance */
+  .hero-text h1,
+  .hero-description,
+  .hero-button {
+    animation: none !important;
+    transform: none !important;
+  }
+  
+  /* Optimize scroll performance */
+  .hero-layout,
+  .section-padding,
+  .app-showcase {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+  
+  /* Additional performance optimizations */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Optimize 3D rendering */
+  canvas {
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+  }
   }
 
   /* Navbar Styles */

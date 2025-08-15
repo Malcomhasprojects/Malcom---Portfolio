@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useMediaQuery } from "react-responsive";
 
 import TitleHeader from "../components/TitleHeader";
 import ContactExperience from "../components/models/contact/ContactExperience";
@@ -9,6 +10,7 @@ import ContactExperience from "../components/models/contact/ContactExperience";
 const Contact = () => {
   const formRef = useRef(null);
   const [loading, setLoading] = useState(false);
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -16,17 +18,20 @@ const Contact = () => {
   });
 
   useGSAP(() => {
-    gsap.fromTo(
-      ".contact-info",
-      { x: -50, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1, ease: "power2.out" }
-    );
+    // Only run animations on non-mobile devices for better performance
+    if (!isMobile) {
+      gsap.fromTo(
+        ".contact-info",
+        { x: -50, opacity: 0 },
+        { x: 0, opacity: 1, duration: 1, ease: "power2.out" }
+      );
 
-    gsap.fromTo(
-      ".contact-form",
-      { x: 50, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1, delay: 0.3, ease: "power2.out" }
-    );
+      gsap.fromTo(
+        ".contact-form",
+        { x: 50, opacity: 0 },
+        { x: 0, opacity: 1, duration: 1, delay: 0.3, ease: "power2.out" }
+      );
+    }
   });
 
   const handleChange = (e) => {
