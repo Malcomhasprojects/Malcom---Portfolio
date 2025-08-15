@@ -1,0 +1,16 @@
+# EmailJS Configuration
+# Get these values from https://www.emailjs.com/
+# Create a .env file in the root directory with these variables:
+
+VITE_APP_EMAILJS_SERVICE_ID=your_service_id_here
+VITE_APP_EMAILJS_TEMPLATE_ID=your_template_id_here
+VITE_APP_EMAILJS_PUBLIC_KEY=your_public_key_here
+
+# Instructions:
+# 1. Go to https://www.emailjs.com/ and create an account
+# 2. Create a new Email Service (Gmail, Outlook, etc.)
+# 3. Create an Email Template
+# 4. Copy the Service ID, Template ID, and Public Key
+# 5. Replace the placeholder values above with your actual values
+# 6. Save as .env in the root directory
+# 7. Restart your development server
