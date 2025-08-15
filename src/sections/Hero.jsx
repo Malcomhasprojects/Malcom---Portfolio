@@ -87,15 +87,19 @@ const Hero = () => {
         <figure>
           <div className="hero-3d-layout">
             <HeroExperience />
-            {/* Mobile fallback */}
-            <div className="md:hidden flex items-center justify-center h-full">
-              <div className="text-center">
-                <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <span className="text-4xl">🚀</span>
-                </div>
-                <p className="text-blue-400 font-semibold">Innovation</p>
-              </div>
-            </div>
+                         {/* Mobile fallback */}
+             <div className="md:hidden flex items-center justify-center h-full">
+               <div className="text-center">
+                 <div className="w-32 h-32 mx-auto mb-4 flex items-center justify-center">
+                   <img 
+                     src="/pics/Screenshot 2025-08-15 141256.jpeg" 
+                     alt="Innovation" 
+                     className="w-full h-full object-cover rounded-full"
+                   />
+                 </div>
+                 <p className="text-blue-400 font-semibold">Innovation</p>
+               </div>
+             </div>
           </div>
         </figure>
       </div>
