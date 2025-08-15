@@ -13,6 +13,9 @@ body {
   color: white;
   scroll-behavior: smooth;
   font-family: "Mona Sans", sans-serif;
+  /* Improve mobile scrolling performance */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
 }
 
 section {
@@ -288,6 +291,13 @@ section {
     @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse;
   }
 
+  /* 3D Canvas Mobile Optimization */
+  @media (max-width: 768px) {
+    canvas {
+      pointer-events: none !important;
+    }
+  }
+
   /* Navbar Styles */
   .navbar {
     @apply fixed w-full left-1/2 py-5 px-5 md:px-20 -translate-x-1/2 z-[100] transition-all duration-300 ease-in-out;
@@ -344,6 +354,10 @@ section {
   /* Hero 3D Layout */
   .hero-3d-layout {
     @apply xl:w-[70%] w-full h-full min-h-[50vh] absolute xl:-top-20 top-24 xl:-right-20 right-0;
+    /* Prevent touch events from interfering with scrolling on mobile */
+    @media (max-width: 768px) {
+      pointer-events: none;
+    }
   }
 
   /* CTA Button Styles */

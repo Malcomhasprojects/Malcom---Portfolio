@@ -1,10 +1,12 @@
 import { Environment, Float, OrbitControls, useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
 import * as THREE from "three";
 
 const TechIconCardExperience = ({ model }) => {
   const scene = useGLTF(model.modelPath);
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   useEffect(() => {
     if (model.name === "Interactive Developer") {
@@ -47,13 +49,22 @@ const TechIconCardExperience = ({ model }) => {
         THREE.Group object contains all the objects (meshes, lights, etc)
         that make up the 3D model.
       */}
-      <Float speed={5.5} rotationIntensity={0.5} floatIntensity={0.9}>
+      {isMobile ? (
+        // Static rendering for mobile to prevent scrolling interference
         <group scale={model.scale} rotation={model.rotation}>
           <primitive object={scene.scene} />
         </group>
-      </Float>
+      ) : (
+        // Animated rendering for desktop
+        <Float speed={5.5} rotationIntensity={0.5} floatIntensity={0.9}>
+          <group scale={model.scale} rotation={model.rotation}>
+            <primitive object={scene.scene} />
+          </group>
+        </Float>
+      )}
 
-      <OrbitControls enableZoom={false} />
+      {/* Only render OrbitControls on non-mobile devices */}
+      {!isMobile && <OrbitControls enableZoom={false} />}
     </Canvas>
   );
 };
